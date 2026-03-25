@@ -17,12 +17,3 @@ resource "google_cloud_run_v2_service" "default" {
     }
   }
 }
-
-# Hacerlo público para la demo (en prod usaríamos IAM más estricto)
-resource "google_cloud_run_service_iam_member" "public_access" {
-  location = google_cloud_run_v2_service.default.location
-  service  = google_cloud_run_v2_service.default.name
-  project  = var.project_id
-  role     = "roles/run.invoker"
-  member   = "allUsers"
-}
